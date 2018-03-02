@@ -226,7 +226,8 @@ class NissanConnect {
             $result->CruisingRangeAcOn = NULL;
             $result->CruisingRangeUnit = NULL;
             $result->CruisingRangeUnit = '---';
-        } elseif ($this->config->country == NissanConnect::COUNTRY_US) {
+        } elseif ($this->config->country == NissanConnect::COUNTRY_US ||
+        		$this->config->tz == 'Europe/London') {
             $result->CruisingRangeAcOn = $response->BatteryStatusRecords->CruisingRangeAcOn * 0.000621371192;
             $result->CruisingRangeAcOff = $response->BatteryStatusRecords->CruisingRangeAcOff * 0.000621371192;
             $result->CruisingRangeUnit = 'miles';

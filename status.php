@@ -17,9 +17,6 @@ Battery: <?php echo "$result->BatteryRemainingAmount/$result->BatteryCapacity ("
 Plugged in: <?php echo ($result->PluggedIn ? '<span class="on">YES</span>' : '<span class="off">NO</span>') ?><br/>
 Charging: <?php echo ($result->Charging ? '<span class="on">YES</span>' : '<span class="off">NO</span>') ?><br/>
 Charge Time:<br/>
-<?php if (!empty($result->TimeRequiredToFull->Formatted)): ?>
-	<span class="charge_trickle">Trickle (120v): <?php echo $result->TimeRequiredToFull->Formatted ?><br/></span>
-<?php endif; ?>
 <?php if (!empty($result->TimeRequiredToFull200->Formatted)): ?>
     <span class="charge_220">Normal (240v) 3.6 kW: <?php echo $result->TimeRequiredToFull200->Formatted ?><br/></span>
 <?php endif; ?>
