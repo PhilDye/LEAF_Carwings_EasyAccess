@@ -46,7 +46,7 @@ class NissanConnect {
     /* @var boolean Enable to echo debugging information into the PHP error log. */
     public $debug = FALSE;
 
-    private $baseURL = 'https://gdcportalgw.its-mo.com/gworchest_160803EC/gdc/';
+    private $baseURL = 'https://gdcportalgw.its-mo.com/api_v181217_NE/gdc/';
 
     private $resultKey = NULL;
     private $config = NULL;
@@ -139,11 +139,8 @@ class NissanConnect {
         $this->prepare();
         if ($option != static::STATUS_QUERY_OPTION_CACHED) {
             $this->sendRequest('BatteryStatusCheckRequest.php');
-            if ($option != static::STATUS_QUERY_OPTION_ASYNC) {
-                $expected_last_updated_date = time();
-                $this->debug("Expected last updated date: " . date("Y-m-d H:i:s", $expected_last_updated_date));
-                $this->waitUntilSuccess('BatteryStatusCheckResultRequest.php');
-            }
+            $expected_last_updated_date = time();
+            $this->debug("Expected last updated date: " . date("Y-m-d H:i:s", $expected_last_updated_date));
         }
         if ($option == static::STATUS_QUERY_OPTION_ASYNC) {
             return NULL;
