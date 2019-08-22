@@ -52,7 +52,7 @@ class NissanConnect {
     # https://github.com/filcole/pycarwings2/issues/
     # https://github.com/jdhorne/pycarwings2/issues/
 
-    private $baseURL = 'https://gdcportalgw.its-mo.com/gworchest_160803EC/gdc/';  # No longer works for some, but works in Sweden. Tweaks were needed to make it work after 2018-12-25
+    private $baseURL = 'https://gdcportalgw.its-mo.com/api_v190426_NE/gdc/';  # No longer works for some, but works in Sweden. Tweaks were needed to make it work after 2018-12-25
     # private $baseURL = 'https://gdcportalgw.its-mo.com/api_v181217_NE/gdc/';    # New December 2018, but doesn't seem to work, gives {"status":408}
     # private $baseURL = 'https://gdcportalgw.its-mo.com/api_v180117_NE/gdc/';    # New from Summer 2018? Not working as of Jan 2019, 404
     # private $baseURL = 'https://gdcportalgw.its-mo.com/gworchest_160803A/gdc/'; # Stopped working summer 2018
@@ -81,7 +81,7 @@ class NissanConnect {
         $this->config->vin = '';
         $this->config->dcmID = '';
         $this->config->UserVehicleBoundTime = '';
-        $this->config->initialAppStrings = 'geORNtsZe5I4lRGjG9GZiA'; // Hard-coded in mobile apps?
+        $this->config->initialAppStrings = '9s5rfKVuMrT03RtzajWNcA'; // Hard-coded in mobile apps?
         $this->config->basePRM = 'uyI5Dj9g8VCOFDnBRUbr3g'; // Will be overwritten with the response from the InitialApp.php call
         $this->config->customSessionID = ''; // Empty until login completes
         $this->config->encryptionOption = $encryptionOption;
@@ -357,7 +357,7 @@ class NissanConnect {
      * @throws Exception
      */
     private function login() {
-        $result = $this->sendRequest('InitialApp.php');
+        $result = $this->sendRequest('InitialApp_v2.php');
         if (empty($result->baseprm)) {
             throw new Exception("Failed to get 'baseprm' using InitialApp.php. Response: " . json_encode($result), static::ERROR_CODE_LOGIN_FAILED);
         }
@@ -398,7 +398,7 @@ class NissanConnect {
      */
     private function sendRequest($path, $params = array()) {
         $params['custom_sessionid'] = $this->config->customSessionID;
-        $params['initial_app_strings'] = $this->config->initialAppStrings;
+        $params['initial_app_str'] = $this->config->initialAppStrings;
         $params['RegionCode'] = $this->config->country;
         $params['lg'] = 'en-US';
         $params['DCMID'] = $this->config->dcmID;
